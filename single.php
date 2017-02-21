@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header(); ?>
 
-	<div id="primary" <?php generate_content_class();?>>
+	<div <?php generate_attr( 'primary' ); ?>>
 		<main id="main" <?php generate_main_class(); ?>>
 		<?php do_action('generate_before_main_content'); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
