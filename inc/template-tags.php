@@ -520,8 +520,8 @@ if ( ! function_exists( 'generate_construct_header' ) ) :
 add_action( 'generate_header','generate_construct_header' );
 function generate_construct_header() {
 	?>
-	<header <?php generate_attr( 'header' ); ?>>
-		<div <?php generate_attr( 'inside-header' ); ?>>
+	<header itemtype="http://schema.org/WPHeader" itemscope="itemscope" id="masthead" <?php generate_header_class(); ?>>
+		<div <?php generate_inside_header_class(); ?>>
 			<?php do_action( 'generate_before_header_content' ); ?>
 			<?php generate_header_items(); ?>
 			<?php do_action( 'generate_after_header_content' ); ?>
@@ -827,7 +827,7 @@ function generate_construct_footer_widgets() {
 		if ( $widgets == 5 ) $widget_width = '20';
 		?>
 		<div id="footer-widgets" class="site footer-widgets">
-			<div <?php generate_attr( 'inside-footer' ); ?>>
+			<div <?php generate_inside_footer_class(); ?>>
 				<div class="inside-footer-widgets">
 					<?php if ( $widgets >= 1 ) : ?>
 						<div class="footer-widget-1 grid-parent grid-<?php echo absint( apply_filters( 'generate_footer_widget_1_width', $widget_width ) ); ?> tablet-grid-<?php echo absint( apply_filters( 'generate_footer_widget_1_tablet_width', '50' ) ); ?> mobile-grid-100">
@@ -937,7 +937,7 @@ function generate_top_bar() {
 	if ( ! is_active_sidebar( 'top-bar' ) )
 		return;
 	?>
-	<div <?php generate_attr( 'top-bar' ); ?>>
+	<div <?php generate_top_bar_class(); ?>>
 		<div class="inside-top-bar<?php if ( 'contained' == generate_get_setting( 'top_bar_inner_width' ) ) echo ' grid-container grid-parent'; ?>">
 			<?php dynamic_sidebar( 'top-bar' ); ?>
 		</div>
