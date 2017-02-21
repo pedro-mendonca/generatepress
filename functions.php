@@ -202,6 +202,11 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/extras.php';
 
 /**
+ * Load our markup
+ */
+require get_template_directory() . '/inc/markup.php';
+
+/**
  * Build the navigation
  */
 require get_template_directory() . '/inc/navigation.php';
@@ -210,11 +215,6 @@ require get_template_directory() . '/inc/navigation.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load element classes
- */
-require get_template_directory() . '/inc/element-classes.php';
 
 /**
  * Load metaboxes
@@ -235,6 +235,11 @@ require get_template_directory() . '/inc/add-ons.php';
  * Load our CSS builder
  */
 require get_template_directory() . '/inc/css.php';
+
+/**
+ * Load our deprecated functions
+ */
+require get_template_directory() . '/inc/deprecated.php';
 
 /**
  * Load plugin compatibility
@@ -583,33 +588,6 @@ function generate_smart_content_width()
 		// If both sidebars are present
 		$content_width = $generate_settings['container_width'] * ( ( 100 - ( $left_sidebar_width + $right_sidebar_width ) ) / 100 );	
 	}
-}
-endif;
-
-if ( ! function_exists( 'generate_body_schema' ) ) :
-/** 
- * Figure out which schema tags to apply to the <body> element
- * @since 1.3.15
- */
-function generate_body_schema()
-{
-	// Set up blog variable
-	$blog = ( is_home() || is_archive() || is_attachment() || is_tax() || is_single() ) ? true : false;
-	
-	// Set up default itemtype
-	$itemtype = 'WebPage';
-
-	// Get itemtype for the blog
-	$itemtype = ( $blog ) ? 'Blog' : $itemtype;
-	
-	// Get itemtype for search results
-	$itemtype = ( is_search() ) ? 'SearchResultsPage' : $itemtype;
-	
-	// Get the result
-	$result = apply_filters( 'generate_body_itemtype', $itemtype );
-	
-	// Return our HTML
-	echo "itemtype='http://schema.org/$result' itemscope='itemscope'";
 }
 endif;
 

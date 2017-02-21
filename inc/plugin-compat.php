@@ -19,8 +19,8 @@ if ( ! function_exists( 'generate_woocommerce_start' ) ) :
 add_action('woocommerce_before_main_content', 'generate_woocommerce_start', 10);
 function generate_woocommerce_start() 
 { ?>
-	<div id="primary" <?php generate_content_class();?>>
-		<main id="main" <?php generate_main_class(); ?>>
+	<div <?php generate_attr( 'primary' ); ?>>
+		<main <?php generate_attr( 'main' ); ?>>
 			<?php do_action('generate_before_main_content'); ?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> <?php generate_article_schema( 'CreativeWork' ); ?>>
 				<div class="inside-article">

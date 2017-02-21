@@ -82,14 +82,15 @@ if ( ! function_exists( 'generate_navigation_position' ) ) :
 function generate_navigation_position()
 {
 	?>
-	<nav itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope" id="site-navigation" <?php generate_navigation_class(); ?>>
-		<div <?php generate_inside_navigation_class(); ?>>
+	<nav <?php generate_attr( 'navigation' ); ?>>
+		<div <?php generate_attr( 'inside-navigation' ); ?>>
 			<?php do_action( 'generate_inside_navigation' ); ?>
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 				<?php do_action( 'generate_inside_mobile_menu' ); ?>
 				<span class="mobile-menu"><?php echo apply_filters('generate_mobile_menu_label', __( 'Menu', 'generatepress' ) ); ?></span>
 			</button>
 			<?php 
+			$classes = array();
 			wp_nav_menu( 
 				array( 
 					'theme_location' => 'primary',
@@ -98,7 +99,7 @@ function generate_navigation_position()
 					'container_id' => 'primary-menu',
 					'menu_class' => '',
 					'fallback_cb' => 'generate_menu_fallback',
-					'items_wrap' => '<ul id="%1$s" class="%2$s ' . join( ' ', generate_get_menu_class() ) . '">%3$s</ul>'
+					'items_wrap' => '<ul ' . generate_get_attr( 'menu', array( 'id' => '%1$s', 'class' => '%2$s ' . implode( ' ', apply_filters( 'generate_menu_class', $classes ) ) ) ) . '>%3$s</ul>'
 				) 
 			);
 			?>
