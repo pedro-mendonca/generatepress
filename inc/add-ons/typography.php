@@ -245,8 +245,7 @@ if ( ! function_exists( 'generate_typography_scripts' ) ) :
  */
 add_action( 'wp_enqueue_scripts', 'generate_typography_scripts', 50 );
 function generate_typography_scripts() {
-	$name = ( wp_style_is( 'generate-defaults', 'enqueued' ) ) ? 'generate-defaults' : 'generate-style';
-	wp_add_inline_style( $name, generate_font_css() );
+	wp_add_inline_style( 'generate-style', generate_font_css() );
 }
 endif;
 
@@ -288,6 +287,11 @@ function generate_enqueue_google_fonts() {
 	if ( ! empty( $font_settings ) ) :
 	
 		foreach ( $font_settings as $key ) {
+			
+			// If the key isn't set, move on
+			if ( ! isset( $generate_settings[$key] ) ) {
+				continue;
+			}
 		
 			// If our value is still using the old format, fix it
 			if ( strpos( $generate_settings[$key], ':' ) !== false )
